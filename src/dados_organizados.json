@@ -1,0 +1,78 @@
+{
+  "dados_pessoais": {
+    "nome": "FELIPE DE ALMEIDA FERREIRA",
+    "telefone": "(15) 981188891",
+    "email": "felipeferreira1507@gmail.com",
+    "linkedin": "linkedin.com.br/in/felipe-ferreira1507f",
+    "localizacao": "Itapetininga, SP - Brasil"
+  },
+  "objetivo": "Exercer de forma exemplar as funções na área da tecnologia da informação, aplicando minhas habilidades para impulsionar resultados positivos visando crescer juntamente com a organização.",
+  "formacao_academica": [
+    {
+      "curso": "Tecnólogo em Análise e Desenvolvimento de Sistemas",
+      "instituicao": "Faculdade de Tecnologia de Itapetininga - FATEC",
+      "ano": "2024"
+    },
+    {
+      "curso": "Técnico em Administração",
+      "instituicao": "ETEC Darcy Pereira de Moraes",
+      "ano": "2018"
+    },
+    {
+      "curso": "Técnico em Edificações",
+      "instituicao": "Instituto Federal de São Paulo Campus Itapetininga - IFSP",
+      "ano": "2019"
+    }
+  ],
+  "experiencia_profissional": [
+    {
+      "cargo": "Assistente Financeiro",
+      "empresa": "Liflex Comercio LTDA",
+      "periodo": "Out 2022 - Atualmente",
+      "atividades": [
+        "Emissão de notas fiscais e boletos bancários",
+        "Criação de tabelas e banco de dados avançados com Microsoft Excel",
+        "Controle de notas fiscais, arquivos e duplicatas"
+      ]
+    },
+    {
+      "cargo": "NOC",
+      "empresa": "Sapo Telecom LTDA",
+      "periodo": "Jan 2022 - Mai 2022",
+      "atividades": [
+        "Monitoramento de rede",
+        "Atualização e configuração de equipamentos de rede",
+        "Suporte remoto de rede"
+      ]
+    },
+    {
+      "cargo": "Estágio em Informática",
+      "empresa": "Prefeitura Municipal de Itapetininga",
+      "periodo": "Set 2019 - Set 2021",
+      "atividades": [
+        "Manutenção de computadores",
+        "Suporte de equipamentos de informática (impressoras, scanners, projetores, etc.)",
+        "Produção e edição de vídeos"
+      ]
+    }
+  ],
+  "habilidades_tecnicas": {
+    "linguagens": ["HTML5", "CSS3", "JavaScript"],
+    "softwares": ["Excel (avançado)", "Camtasia Studio", "AutoCAD"],
+    "sistemas_operacionais": ["Linux", "Windows"]
+  },
+  "idiomas": [
+    {
+      "idioma": "Português",
+      "nivel": "Nativo"
+    },
+    {
+      "idioma": "Inglês",
+      "nivel": "Avançado - Nivel B2 - TOEIC (ETS) 2022 - 2024"
+    },
+    {
+      "idioma": "Espanhol",
+      "nivel": "Intermediário"
+    }
+  ]
+}
