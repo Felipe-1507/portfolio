@@ -4,13 +4,10 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   plugins: [react()],
+  base: "/portfolio/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    allowedHosts: ["5173-imclem4xblvqsy50npom3-adced74b.manusvm.computer"],
-  },
 })
-
