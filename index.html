@@ -1,21 +1,963 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Removendo referência ao favicon.ico e usando apenas PNG para melhor transparência -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons_transparent/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicons_transparent/favicon-48x48.png" />
-    <link rel="icon" type="image/png" sizes="64x64" href="/favicons_transparent/favicon-64x64.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons_transparent/apple-touch-icon.png" />
-    <!-- Adicionando fonte arredondada do Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Felipe Ferreira</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Felipe Ferreira — Desenvolvedor Front-end & Analista de Sistemas.">
+<title>Felipe Ferreira — Developer & Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* fundo: preto com leve toque quente, não azulado */
+  --bg:#060203;
+  --bg-c:#100608;
+  --bg-el:#1a0a0c;
+  --ln:rgba(255,255,255,.07);
+  --lnm:rgba(255,255,255,.12);
+  --lns:rgba(255,255,255,.22);
+  /* textos: branco levemente quente */
+  --t1:#f8f2f2;
+  --t2:#c0a8a8;
+  --t3:#6b3a3a;
+  /* acento principal: vermelho vivo */
+  --v:#e8272a;
+  --vd:rgba(232,39,42,.12);
+  --vg:rgba(232,39,42,.28);
+  /* acento secundário: vermelho âmbar (contraste suave) */
+  --tl:#ff6b35;
+  --red:#e8272a;
+  --red-d:rgba(232,39,42,.12);
+  --red-g:rgba(232,39,42,.28);
+  --fd:'Space Grotesk',sans-serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidden;cursor:none}
+
+/* ── CURSOR ── */
+.cur{position:fixed;width:8px;height:8px;background:var(--v);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen}
+.cring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(232,39,42,.55);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .22s,height .22s,opacity .22s}
+.cring.big{width:52px;height:52px;opacity:.5}
+@media(max-width:640px){.cur,.cring{display:none}body{cursor:auto}}
+
+/* ── ANIMATED BACKGROUND ── */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* Floating orbs */
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(110px)}
+.orb1{width:650px;height:650px;background:radial-gradient(circle,rgba(232,39,42,.38),transparent 65%);top:-220px;right:-150px;animation:orbFloat1 18s ease-in-out infinite}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(180,20,20,.22),transparent 65%);bottom:5%;left:-180px;animation:orbFloat2 22s ease-in-out infinite}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,107,53,.18),transparent 65%);bottom:35%;right:10%;animation:orbFloat3 16s ease-in-out infinite}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}30%{transform:translate(-30px,40px) scale(1.08)}60%{transform:translate(25px,-20px) scale(.95)}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0)}40%{transform:translate(40px,-35px)}70%{transform:translate(-20px,25px)}}
+@keyframes orbFloat3{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,30px)}}
+
+/* Grid */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:72px 72px}
+
+/* ── PROGRESS ── */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#8a0c0e,var(--v),var(--tl));z-index:200;transition:width .08s linear}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 0;background:rgba(6,2,3,.85);backdrop-filter:blur(24px);border-bottom:1px solid rgba(232,39,42,.12)}
+nav .w{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--fd);font-weight:700;font-size:1.1rem;text-decoration:none;color:var(--t1);letter-spacing:-.03em}
+.logo em{color:var(--v);font-style:normal}
+.nav-ul{list-style:none;display:flex;gap:2.5rem}
+.nav-ul a{font-family:var(--fm);font-size:.72rem;color:var(--t2);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-ul a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--v);transition:width .25s}
+.nav-ul a:hover{color:var(--t1)}
+.nav-ul a:hover::after{width:100%}
+.nbtn{font-family:var(--fm);font-size:.72rem;color:var(--v);border:1px solid rgba(232,39,42,.35);padding:.45rem 1.15rem;border-radius:5px;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+.nbtn:hover{background:var(--v);color:#fff}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:0}
+.burger span{display:block;width:22px;height:1.5px;background:var(--t1)}
+
+/* MOBILE MENU */
+.mob{display:none;position:fixed;inset:0;background:rgba(7,7,13,.97);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob.open{display:flex}
+.mob a{font-family:var(--fd);font-size:2.2rem;font-weight:700;color:var(--t1);text-decoration:none;transition:color .2s}
+.mob a:hover{color:var(--v)}
+.mob-x{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--t2);font-size:1.5rem;cursor:pointer}
+
+/* ── LAYOUT ── */
+.w{max-width:1080px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+section{padding:7rem 0}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:9rem;padding-bottom:6rem}
+.hstatus{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.72rem;color:var(--tl);border:1px solid rgba(255,107,53,.28);background:rgba(255,107,53,.06);padding:.35rem 1rem;border-radius:100px;margin-bottom:1.75rem;opacity:0;animation:up .6s ease .1s forwards}
+.hdot{width:6px;height:6px;background:var(--tl);border-radius:50%;animation:pulse 2s infinite}
+
+/* HEADLINE — ambas as linhas totalmente brancas */
+.hhead{font-family:var(--fd);font-size:clamp(4.2rem,10vw,8.5rem);font-weight:700;line-height:.92;letter-spacing:-.055em;margin-bottom:1.5rem;opacity:0;animation:up .75s ease .28s forwards;color:var(--t1)}
+/* sem stroke, só branco puro */
+.hhead span{color:var(--t1)}
+
+.hsub{font-size:1.15rem;color:var(--t2);max-width:520px;line-height:1.85;margin-bottom:2.5rem;opacity:0;animation:up .75s ease .44s forwards}
+.hsub strong{color:var(--t1);font-weight:500}
+
+.hbtns{display:flex;gap:.875rem;flex-wrap:wrap;opacity:0;animation:up .75s ease .58s forwards}
+.bp{display:inline-flex;align-items:center;gap:.45rem;background:var(--v);color:#fff;text-decoration:none;font-family:var(--fd);font-weight:600;font-size:.9rem;padding:.875rem 2rem;border-radius:6px;transition:all .2s}
+.bp:hover{background:#c81c1e;transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,39,42,.45)}
+.bs{display:inline-flex;align-items:center;gap:.45rem;background:transparent;color:var(--t1);text-decoration:none;font-family:var(--fd);font-weight:600;font-size:.9rem;padding:.875rem 2rem;border-radius:6px;border:1px solid var(--lnm);transition:all .2s}
+.bs:hover{border-color:var(--lns);background:rgba(255,255,255,.05)}
+.bcv{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--tl);font-family:var(--fm);font-weight:500;font-size:.72rem;padding:.7rem 1.35rem;border-radius:5px;border:1px solid rgba(255,107,53,.35);transition:all .2s;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.bcv:hover{background:rgba(255,107,53,.1);border-color:rgba(255,107,53,.65)}
+
+.hscroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:0;animation:fadein 1s ease 1.3s forwards}
+.hscroll span{font-family:var(--fm);font-size:.62rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase}
+.scl{width:1px;height:50px;background:linear-gradient(var(--v),transparent);animation:scpulse 2s ease-in-out infinite}
+
+/* ── SECTION ── */
+.sl{font-family:var(--fm);font-size:.72rem;color:var(--v);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.65rem;display:flex;align-items:center;gap:.65rem}
+.sl::after{content:'';height:1px;background:rgba(232,39,42,.2);width:50px}
+.st{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.04em;line-height:1.08;margin-bottom:.9rem;color:var(--t1)}
+.ss{color:var(--t2);max-width:520px;margin-bottom:3.5rem;font-size:1.05rem;line-height:1.75}
+
+/* ── ABOUT ── */
+.ag{display:grid;grid-template-columns:1.1fr 1fr;gap:4.5rem;align-items:start}
+.at p{color:var(--t2);margin-bottom:1.2rem;line-height:1.9;font-size:1.02rem}
+.at p strong{color:var(--t1);font-weight:500}
+.acards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ln);border:1px solid var(--lnm);border-radius:14px;overflow:hidden;margin-top:2rem}
+.acard{background:var(--bg-c);padding:1.6rem;transition:background .2s}
+.acard:hover{background:var(--bg-el)}
+.an{font-family:var(--fd);font-size:2.5rem;font-weight:700;letter-spacing:-.06em;line-height:1;color:var(--t1)}
+.an em{color:var(--v);font-style:normal}
+.al{font-family:var(--fm);font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:.35rem}
+.langs{margin-top:2rem;display:flex;flex-direction:column;gap:.8rem}
+.lrow{display:flex;align-items:center;gap:1rem}
+.ln2{font-family:var(--fm);font-size:.78rem;color:var(--t2);min-width:76px}
+.lbar{flex:1;height:2px;background:var(--ln);border-radius:2px}
+.lfill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--v),var(--tl))}
+.llv{font-family:var(--fm);font-size:.68rem;color:var(--t3);min-width:72px;text-align:right}
+
+/* ── EXPERIENCE ── */
+.exl{position:relative}
+.exl::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,transparent,var(--lnm) 8%,var(--lnm) 92%,transparent)}
+.exi{padding:1.875rem 0 1.875rem 2.5rem;border-bottom:1px solid var(--ln);position:relative}
+.exi:last-child{border-bottom:none}
+.exi::before{content:'';position:absolute;left:-4.5px;top:2.1rem;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1.5px solid var(--t3);transition:all .25s}
+.exi:hover::before{border-color:var(--v);background:var(--v);box-shadow:0 0 16px rgba(232,39,42,.4)}
+.ep{font-family:var(--fm);font-size:.72rem;color:var(--tl);letter-spacing:.07em;margin-bottom:.45rem}
+.er{font-family:var(--fd);font-size:1.18rem;font-weight:700;letter-spacing:-.025em;margin-bottom:.2rem;color:var(--t1)}
+.ec{font-size:.92rem;color:var(--t2);margin-bottom:.9rem;font-weight:500}
+.ed{font-size:.92rem;color:var(--t2);line-height:1.8}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.875rem}
+.tag{font-family:var(--fm);font-size:.67rem;color:var(--t2);border:1px solid var(--lnm);padding:.22rem .6rem;border-radius:4px;letter-spacing:.05em;transition:all .2s}
+.tag:hover{border-color:rgba(232,39,42,.45);color:var(--v)}
+
+/* ── SKILLS ── */
+.skg{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.875rem}
+.skc{background:var(--bg-c);border:1px solid var(--lnm);border-radius:12px;padding:1.75rem;transition:all .25s;position:relative;overflow:hidden}
+.skc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,39,42,.1),transparent 55%);opacity:0;transition:opacity .3s}
+.skc:hover{border-color:rgba(232,39,42,.3);transform:translateY(-3px)}
+.skc:hover::before{opacity:1}
+.ski{font-size:1.4rem;margin-bottom:.875rem;display:block}
+.skt{font-family:var(--fd);font-size:1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.7rem;color:var(--t1)}
+.skis{display:flex;flex-wrap:wrap;gap:.35rem}
+.skit{font-family:var(--fm);font-size:.7rem;color:var(--t2);background:rgba(255,255,255,.055);border:1px solid var(--lnm);padding:.2rem .52rem;border-radius:4px}
+
+/* ── PROJETOS (CARROSSEL) ── */
+#projetos{overflow:hidden}
+.car-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.car-nav{display:flex;gap:.5rem}
+.car-nav button{width:40px;height:40px;border-radius:50%;background:var(--bg-c);border:1px solid var(--lnm);color:var(--t2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.car-nav button:hover{border-color:rgba(232,39,42,.55);color:var(--v);background:rgba(232,39,42,.1)}
+.car-outer{overflow:hidden}
+.car-track{display:flex;gap:1.5rem;transition:transform .55s cubic-bezier(.25,.1,.25,1);will-change:transform}
+
+/* ── PROJECT CARD ── */
+.pcard{
+  flex-shrink:0;
+  width:calc(50% - .75rem);   /* 2 por vez */
+  background:var(--bg-c);
+  border:1px solid var(--lnm);
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:all .32s;
+  position:relative;
+  cursor:pointer;
+}
+.pcard:hover{border-color:rgba(232,39,42,.38);transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.7)}
+@media(max-width:700px){.pcard{width:100%}}
+
+/* ── PREVIEW ANIMADO ── */
+.pprev{
+  height:200px;
+  position:relative;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+/* Shimmer line */
+.pprev::after{
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
+  animation:shimmer 3s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+@keyframes shimmer{0%{left:-60%}100%{left:160%}}
+
+/* Badge */
+.pbadge{position:absolute;top:.875rem;right:.875rem;font-family:var(--fm);font-size:.62rem;color:var(--tl);background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.3);padding:.22rem .6rem;border-radius:4px;letter-spacing:.07em;text-transform:uppercase;z-index:5}
+.pbadge-red{color:var(--red);background:rgba(239,45,45,.1);border-color:rgba(239,45,45,.3)}
+
+/* Hover overlay */
+.pov{position:absolute;inset:0;background:rgba(7,7,13,0);display:flex;align-items:center;justify-content:center;z-index:3;transition:background .28s}
+.pcard:hover .pov{background:rgba(7,7,13,.6)}
+.pvst{opacity:0;background:var(--v);color:#fff;font-family:var(--fm);font-size:.74rem;padding:.5rem 1.1rem;border-radius:5px;transition:opacity .28s;letter-spacing:.05em;text-decoration:none;white-space:nowrap}
+.pcard:hover .pvst{opacity:1}
+
+/* Card body */
+.pbody{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.pnum{font-family:var(--fm);font-size:.65rem;color:var(--v);letter-spacing:.12em;margin-bottom:.875rem;opacity:.8}
+.pname{font-family:var(--fd);font-size:1.2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;color:var(--t1)}
+.pdesc{color:var(--t2);font-size:.88rem;line-height:1.75;flex:1;margin-bottom:1.25rem}
+.pfoot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.ptech{display:flex;flex-wrap:wrap;gap:.3rem}
+.plink{font-family:var(--fm);font-size:.7rem;color:var(--v);text-decoration:none;transition:color .2s;letter-spacing:.04em}
+.plink:hover{color:var(--tl)}
+.dots{display:flex;gap:.4rem;margin-top:1.5rem;justify-content:center}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--t3);transition:all .25s;cursor:pointer}
+.dot.on{background:var(--v);width:22px;border-radius:3px}
+
+/* ── HYLIAN FINANCE PREVIEW ── */
+.hf-preview{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#0d0203 0%,#150408 60%,#100204 100%);
+  display:flex;flex-direction:column;
+  padding:1rem;
+  position:relative;
+}
+/* Fake sidebar */
+.hf-sidebar{
+  position:absolute;left:0;top:0;bottom:0;width:42px;
+  background:#08010203;
+  border-right:1px solid rgba(232,39,42,.18);
+  display:flex;flex-direction:column;align-items:center;padding-top:12px;gap:8px;
+}
+.hf-icon{width:20px;height:4px;border-radius:2px;background:rgba(232,39,42,.15)}
+.hf-icon.act{background:rgba(232,39,42,.7)}
+/* Content */
+.hf-content{margin-left:50px;display:flex;flex-direction:column;gap:8px}
+/* Stats row */
+.hf-stats{display:flex;gap:6px}
+.hf-stat{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(232,39,42,.1);border-radius:6px;padding:5px 7px}
+.hf-stat-val{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#ff6b35;font-weight:500}
+.hf-stat-lbl{font-size:.48rem;color:rgba(192,168,168,.5);text-transform:uppercase;letter-spacing:.06em;margin-top:1px}
+/* Chart bars */
+.hf-chart{display:flex;align-items:flex-end;gap:4px;height:48px;margin-top:4px}
+.hf-bar{border-radius:2px 2px 0 0;animation:barGrow 1s ease forwards}
+@keyframes barGrow{from{height:0}to{height:var(--h)}}
+/* Pie placeholder */
+.hf-pie{width:38px;height:38px;border-radius:50%;background:conic-gradient(#e8272a 0% 45%,#ff6b35 45% 70%,rgba(255,255,255,.08) 70% 100%);margin-left:auto;flex-shrink:0;animation:rotatePie 8s linear infinite}
+@keyframes rotatePie{to{transform:rotate(360deg)}}
+
+/* ── HYLIAN (sistema) PREVIEW ── */
+.hl-preview{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#0a0005 0%,#160510 60%,#1a0808 100%);
+  display:flex;
+  position:relative;
+  overflow:hidden;
+}
+/* Dark sidebar — preto/vermelho */
+.hl-sidebar{
+  width:44px;flex-shrink:0;
+  background:#060205;
+  border-right:1px solid rgba(239,45,45,.2);
+  display:flex;flex-direction:column;align-items:center;padding-top:10px;gap:7px;
+}
+.hl-dot{width:18px;height:3px;border-radius:2px;background:rgba(239,45,45,.2)}
+.hl-dot.act{background:rgba(239,45,45,.75)}
+/* Main area */
+.hl-main{flex:1;padding:10px;display:flex;flex-direction:column;gap:6px}
+.hl-title{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(239,45,45,.8);letter-spacing:.18em;text-transform:uppercase;margin-bottom:2px}
+/* Metric cards */
+.hl-metrics{display:flex;gap:5px}
+.hl-m{flex:1;background:rgba(239,45,45,.06);border:1px solid rgba(239,45,45,.15);border-radius:5px;padding:5px}
+.hl-m-val{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#ff6b6b;font-weight:500}
+.hl-m-lbl{font-size:.45rem;color:rgba(168,100,100,.6);text-transform:uppercase;margin-top:1px;letter-spacing:.07em}
+/* Table rows */
+.hl-table{display:flex;flex-direction:column;gap:3px;margin-top:2px}
+.hl-row{height:10px;border-radius:2px;background:rgba(239,45,45,.05);border:1px solid rgba(239,45,45,.1);display:flex;align-items:center;padding:0 5px;gap:4px}
+.hl-row-dot{width:4px;height:4px;border-radius:50%}
+.hl-row-bar{height:3px;border-radius:2px;animation:barH 1.2s ease forwards}
+@keyframes barH{from{width:0}to{width:var(--w)}}
+/* Animated triangle watermark */
+.hl-tri{
+  position:absolute;right:8px;bottom:8px;
+  opacity:.08;
+  animation:triPulse 3s ease-in-out infinite;
+}
+@keyframes triPulse{0%,100%{opacity:.06;transform:scale(1)}50%{opacity:.14;transform:scale(1.06)}}
+
+/* ── EDUCATION ── */
+.edug{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.875rem}
+.educ{background:var(--bg-c);border:1px solid var(--lnm);border-radius:12px;padding:1.7rem;transition:all .25s}
+.educ:hover{border-color:rgba(232,39,42,.3)}
+.eduy{font-family:var(--fm);font-size:.68rem;color:var(--tl);letter-spacing:.08em;margin-bottom:.7rem}
+.edud{font-family:var(--fd);font-weight:700;font-size:.95rem;letter-spacing:-.02em;margin-bottom:.35rem;color:var(--t1)}
+.edus{font-size:.85rem;color:var(--t2)}
+
+/* ── CONTACT ── */
+.ctg{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.ctlinks{display:flex;flex-direction:column;gap:.75rem;margin-top:1.75rem}
+.clink{display:flex;align-items:center;gap:.875rem;padding:1.2rem 1.5rem;background:var(--bg-c);border:1px solid var(--lnm);border-radius:10px;text-decoration:none;color:var(--t1);transition:all .25s}
+.clink:hover{border-color:rgba(232,39,42,.35);transform:translateX(6px)}
+.clico{width:38px;height:38px;background:rgba(232,39,42,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--fm);font-size:.95rem;color:var(--v)}
+.cll{font-family:var(--fm);font-size:.65rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em}
+.clv{font-size:.88rem;color:var(--t2);margin-top:.1rem}
+.clarr{color:var(--t3);margin-left:auto;transition:all .25s}
+.clink:hover .clarr{color:var(--v);transform:translateX(4px)}
+.cvbn{background:linear-gradient(135deg,var(--bg-c),var(--bg-el));border:1px solid var(--lnm);border-radius:12px;padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.cvbn .ct{font-family:var(--fd);font-weight:700;letter-spacing:-.025em;color:var(--t1);margin-bottom:.2rem}
+.cvbn .cs{font-size:.85rem;color:var(--t2)}
+
+/* FORM */
+.fbox{background:var(--bg-c);border:1px solid var(--lnm);border-radius:14px;padding:2rem}
+.fg{margin-bottom:1.125rem}
+.fl{display:block;font-family:var(--fm);font-size:.68rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.fi,.ft{width:100%;background:var(--bg-el);border:1px solid var(--lnm);border-radius:7px;padding:.85rem 1rem;color:var(--t1);font-family:var(--fb);font-size:.92rem;outline:none;resize:vertical;transition:border-color .2s}
+.fi::placeholder,.ft::placeholder{color:var(--t3)}
+.fi:focus,.ft:focus{border-color:rgba(232,39,42,.5)}
+.ft{min-height:120px}
+.fsub{width:100%;background:var(--v);color:#fff;border:none;border-radius:7px;padding:.95rem;font-family:var(--fd);font-weight:700;font-size:.92rem;cursor:pointer;transition:all .2s}
+.fsub:hover{background:#c81c1e;transform:translateY(-2px);box-shadow:0 10px 28px rgba(232,39,42,.42)}
+#fst{margin-top:.6rem;font-family:var(--fm);font-size:.72rem;text-align:center}
+
+/* FOOTER */
+footer{border-top:1px solid var(--lnm);padding:2.25rem 0;position:relative;z-index:1}
+footer .w{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.ftl,.ftr{font-family:var(--fm);font-size:.72rem;color:var(--t3)}
+.ftr em{color:var(--v);font-style:normal}
+
+/* ANIMATIONS */
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes scpulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.65)}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ── PARTICLE CANVAS ── */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+
+@media(max-width:900px){
+  .ag,.ctg{grid-template-columns:1fr;gap:3rem}
+  .nav-ul,.nbtn{display:none}
+  .burger{display:flex}
+}
+@media(max-width:600px){
+  section{padding:5rem 0}
+  .w{padding:0 1.25rem}
+  .hhead{font-size:3.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ANIMATED BACKGROUND PARTICLES -->
+<canvas id="particles"></canvas>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="cur" id="cur"></div>
+<div class="cring" id="cr"></div>
+<div id="prog"></div>
+
+<!-- Mobile menu -->
+<div class="mob" id="mob">
+  <button class="mob-x" id="mobx">✕</button>
+  <a href="#sobre" onclick="cm()">Sobre</a>
+  <a href="#experiencia" onclick="cm()">Experiência</a>
+  <a href="#projetos" onclick="cm()">Projetos</a>
+  <a href="#habilidades" onclick="cm()">Habilidades</a>
+  <a href="#contato" onclick="cm()">Contato</a>
+</div>
+
+<nav>
+  <div class="w">
+    <a href="#" class="logo">felipe<em>.</em>dev</a>
+    <ul class="nav-ul">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+    </ul>
+    <a href="#contato" class="nbtn">Contato</a>
+    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ──────────────────────── HERO ──────────────────────── -->
+<section id="hero">
+  <div class="w" style="position:relative">
+    <div class="hstatus"><div class="hdot"></div>Disponível para oportunidades</div>
+    <!-- AMBAS AS LINHAS BRANCAS -->
+    <h1 class="hhead">Felipe<br><span>Ferreira</span></h1>
+    <p class="hsub">Tecnólogo em <strong>Análise e Desenvolvimento de Sistemas</strong> apaixonado por front-end, interfaces funcionais e código com propósito.</p>
+    <div class="hbtns">
+      <a href="#projetos" class="bp">Ver projetos →</a>
+      <a href="#contato" class="bs">Entre em contato</a>
+      <button onclick="downloadCV()" class="bcv">⬇ Download CV</button>
+    </div>
+    <div class="hscroll"><span>scroll</span><div class="scl"></div></div>
+  </div>
+</section>
+
+<!-- ──────────────────────── SOBRE ──────────────────────── -->
+<section id="sobre">
+  <div class="w">
+    <div class="sl rv">01 / Sobre</div>
+    <div class="ag">
+      <div class="at rv">
+        <h2 class="st">Construindo soluções com propósito</h2>
+        <p>Sou <strong>Felipe Ferreira</strong>, tecnólogo em ADS pela FATEC Itapetininga. Combino experiência em suporte técnico, redes e front-end com inglês avançado (B2 TOEIC) e mentalidade analítica.</p>
+        <p>Gosto de criar interfaces limpas, resolver problemas reais e automatizar processos. Do HTML ao Excel avançado, meu foco está sempre na qualidade e clareza do resultado.</p>
+        <p>Baseado em <strong>Itapetininga, SP</strong> — disponível para trabalho remoto ou presencial em São Paulo.</p>
+        <div class="langs">
+          <div class="lrow"><span class="ln2">Português</span><div class="lbar"><div class="lfill" style="width:100%"></div></div><span class="llv">Nativo</span></div>
+          <div class="lrow"><span class="ln2">Inglês</span><div class="lbar"><div class="lfill" style="width:80%"></div></div><span class="llv">B2 / TOEIC</span></div>
+          <div class="lrow"><span class="ln2">Espanhol</span><div class="lbar"><div class="lfill" style="width:48%"></div></div><span class="llv">Intermediário</span></div>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="acards">
+          <div class="acard"><div class="an">3<em>+</em></div><div class="al">Anos de experiência</div></div>
+          <div class="acard"><div class="an">B<em>2</em></div><div class="al">Inglês TOEIC</div></div>
+          <div class="acard"><div class="an">5<em>+</em></div><div class="al">Tecnologias</div></div>
+          <div class="acard"><div class="an">100<em>%</em></div><div class="al">Comprometimento</div></div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <button onclick="downloadCV()" class="bcv" style="width:100%;justify-content:center">⬇ Baixar Currículo em PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────── EXPERIÊNCIA ──────────────────────── -->
+<section id="experiencia">
+  <div class="w">
+    <div class="sl rv">02 / Experiência</div>
+    <h2 class="st rv">Trajetória profissional</h2>
+    <p class="ss rv">Cada experiência moldou minha visão técnica e analítica.</p>
+    <div class="exl">
+      <div class="exi rv">
+        <div class="ep">Out 2022 — Atualmente</div>
+        <div class="er">Assistente Financeiro</div>
+        <div class="ec">Liflex Comércio LTDA</div>
+        <div class="ed">Emissão de notas fiscais e boletos, controle de duplicatas e arquivos fiscais. Criação de dashboards e automações avançadas em Excel.</div>
+        <div class="tags"><span class="tag">Excel Avançado</span><span class="tag">Gestão Financeira</span><span class="tag">NF-e</span><span class="tag">Análise de Dados</span></div>
+      </div>
+      <div class="exi rv d1">
+        <div class="ep">Jan 2022 — Mai 2022</div>
+        <div class="er">NOC — Network Operations Center</div>
+        <div class="ec">Sapo Telecom LTDA</div>
+        <div class="ed">Monitoramento de redes de telecomunicações, configuração de equipamentos, suporte remoto e resolução de incidentes em tempo real.</div>
+        <div class="tags"><span class="tag">Monitoramento de Rede</span><span class="tag">Linux</span><span class="tag">Suporte Técnico</span><span class="tag">NOC</span></div>
+      </div>
+      <div class="exi rv d2">
+        <div class="ep">Set 2019 — Set 2021</div>
+        <div class="er">Estagiário em Informática</div>
+        <div class="ec">Prefeitura Municipal de Itapetininga</div>
+        <div class="ed">Manutenção de computadores e periféricos, suporte técnico e produção de vídeos institucionais com Camtasia Studio.</div>
+        <div class="tags"><span class="tag">Hardware</span><span class="tag">Suporte TI</span><span class="tag">Edição de Vídeo</span><span class="tag">Windows</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────── PROJETOS ──────────────────────── -->
+<section id="projetos">
+  <div class="w">
+    <div class="car-hd">
+      <div>
+        <div class="sl rv">03 / Projetos</div>
+        <h2 class="st rv" style="margin-bottom:0">O que estou construindo</h2>
+      </div>
+      <div class="rv d2" style="display:flex;flex-direction:column;align-items:flex-end;gap:.75rem">
+        <a href="https://github.com/Felipe-1507" target="_blank" rel="noopener" class="bcv">Ver GitHub →</a>
+        <div class="car-nav">
+          <button id="cprev">←</button>
+          <button id="cnext">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="car-outer rv">
+      <div class="car-track" id="ctrack">
+
+        <!-- ── CARD 1: HYLIAN FINANCE ── -->
+        <div class="pcard" onclick="op('https://felipe-1507.github.io/hylian_finance/')">
+          <span class="pbadge">● Live</span>
+          <div class="pprev">
+            <!-- Preview animado do Hylian Finance -->
+            <div class="hf-preview">
+              <div class="hf-sidebar">
+                <div class="hf-icon act"></div>
+                <div class="hf-icon"></div>
+                <div class="hf-icon"></div>
+                <div class="hf-icon"></div>
+                <div class="hf-icon"></div>
+              </div>
+              <div class="hf-content">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:.55rem;color:rgba(232,39,42,.6);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px">⟁ HYLIAN FINANCE</div>
+                <div class="hf-stats">
+                  <div class="hf-stat">
+                    <div class="hf-stat-val">R$4.820</div>
+                    <div class="hf-stat-lbl">Receitas</div>
+                  </div>
+                  <div class="hf-stat">
+                    <div class="hf-stat-val" style="color:#ff8888">R$1.240</div>
+                    <div class="hf-stat-lbl">Despesas</div>
+                  </div>
+                  <div class="hf-stat">
+                    <div class="hf-stat-val" style="color:#ff6b35">R$3.580</div>
+                    <div class="hf-stat-lbl">Saldo</div>
+                  </div>
+                </div>
+                <!-- Barras animadas -->
+                <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:8px">
+                  <div class="hf-chart" style="flex:1">
+                    <div class="hf-bar" style="--h:28px;width:10px;background:rgba(232,39,42,.4)"></div>
+                    <div class="hf-bar" style="--h:42px;width:10px;background:rgba(232,39,42,.55)"></div>
+                    <div class="hf-bar" style="--h:35px;width:10px;background:rgba(232,39,42,.45)"></div>
+                    <div class="hf-bar" style="--h:48px;width:10px;background:rgba(232,39,42,.6)"></div>
+                    <div class="hf-bar" style="--h:52px;width:10px;background:rgba(255,107,53,.55)"></div>
+                    <div class="hf-bar" style="--h:44px;width:10px;background:rgba(255,107,53,.65)"></div>
+                  </div>
+                  <div class="hf-pie" style="background:conic-gradient(#e8272a 0% 45%,#ff6b35 45% 70%,rgba(255,255,255,.08) 70% 100%)"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pov">
+              <a class="pvst" href="https://felipe-1507.github.io/hylian_finance/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Visitar site →</a>
+            </div>
+          </div>
+          <div class="pbody">
+            <div class="pnum">001 / Destaque · Web App</div>
+            <div class="pname">Hylian Finance</div>
+            <div class="pdesc">App web de finanças pessoais com autenticação Google via Firebase, dashboard de receitas/despesas, gráficos, gestão de cartões, metas de economia, lembretes e exportação para Excel.</div>
+            <div class="pfoot">
+              <div class="ptech"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag">Firebase</span><span class="tag">Tailwind</span><span class="tag">Chart.js</span></div>
+              <a href="https://felipe-1507.github.io/hylian_finance/" target="_blank" rel="noopener" class="plink" onclick="event.stopPropagation()">Abrir ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 2: HYLIAN (sistema local) ── -->
+        <div class="pcard">
+          <span class="pbadge pbadge-red">● Local</span>
+          <div class="pprev">
+            <!-- Preview animado — preto/vermelho -->
+            <div class="hl-preview">
+              <div class="hl-sidebar">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:.38rem;color:rgba(239,45,45,.5);letter-spacing:.08em;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);margin-bottom:auto;margin-top:6px">HYLIAN</div>
+                <div class="hl-dot act"></div>
+                <div class="hl-dot"></div>
+                <div class="hl-dot"></div>
+                <div class="hl-dot"></div>
+                <div class="hl-dot"></div>
+                <div class="hl-dot"></div>
+              </div>
+              <div class="hl-main">
+                <div class="hl-title">⬡ Dashboard</div>
+                <div class="hl-metrics">
+                  <div class="hl-m">
+                    <div class="hl-m-val">12</div>
+                    <div class="hl-m-lbl">Cancelamentos</div>
+                  </div>
+                  <div class="hl-m">
+                    <div class="hl-m-val" style="color:#ffaa66">47</div>
+                    <div class="hl-m-lbl">NFs Baixadas</div>
+                  </div>
+                  <div class="hl-m">
+                    <div class="hl-m-val" style="color:#ff8888">R$84k</div>
+                    <div class="hl-m-lbl">Valor/Mês</div>
+                  </div>
+                </div>
+                <div class="hl-table">
+                  <div class="hl-row"><div class="hl-row-dot" style="background:#ef2d2d"></div><div class="hl-row-bar" style="--w:55%;background:rgba(239,45,45,.25)"></div></div>
+                  <div class="hl-row"><div class="hl-row-dot" style="background:#ff8855"></div><div class="hl-row-bar" style="--w:38%;background:rgba(255,136,85,.2)"></div></div>
+                  <div class="hl-row"><div class="hl-row-dot" style="background:#ffaa44"></div><div class="hl-row-bar" style="--w:72%;background:rgba(255,170,68,.15)"></div></div>
+                  <div class="hl-row"><div class="hl-row-dot" style="background:#ef2d2d"></div><div class="hl-row-bar" style="--w:28%;background:rgba(239,45,45,.2)"></div></div>
+                </div>
+              </div>
+              <!-- Triângulo watermark animado -->
+              <svg class="hl-tri" width="56" height="50" viewBox="0 0 56 50">
+                <polygon points="28,3 3,47 53,47" fill="none" stroke="#ef2d2d" stroke-width="1.5"/>
+                <polygon points="28,14 13,40 43,40" fill="none" stroke="#ef2d2d" stroke-width="1" opacity=".5"/>
+              </svg>
+            </div>
+            <div class="pov">
+              <span class="pvst" style="background:var(--red)">Sistema Local</span>
+            </div>
+          </div>
+          <div class="pbody">
+            <div class="pnum" style="color:var(--red)">002 / Sistema Interno</div>
+            <div class="pname">HYLIAN</div>
+            <div class="pdesc">Sistema de automação financeira para uso no trabalho. Módulos de depósitos PIX, disparo de boletos, baixa de notas fiscais, relatórios de cobrança, cancelamento de NF e integração com Google Sheets.</div>
+            <div class="pfoot">
+              <div class="ptech"><span class="tag">HTML</span><span class="tag">Tailwind</span><span class="tag">JS</span><span class="tag">Chart.js</span><span class="tag">Lucide</span><span class="tag">XLSX</span></div>
+              <span style="font-family:var(--fm);font-size:.68rem;color:var(--t3);letter-spacing:.04em">Uso interno</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<!-- ──────────────────────── HABILIDADES ──────────────────────── -->
+<section id="habilidades">
+  <div class="w">
+    <div class="sl rv">04 / Habilidades</div>
+    <h2 class="st rv">Stack técnica</h2>
+    <p class="ss rv">Ferramentas e tecnologias que uso para criar soluções.</p>
+    <div class="skg">
+      <div class="skc rv"><span class="ski">⟨/⟩</span><div class="skt">Front-end</div><div class="skis"><span class="skit">HTML5</span><span class="skit">CSS3</span><span class="skit">JavaScript</span><span class="skit">Firebase</span><span class="skit">Tailwind CSS</span><span class="skit">Chart.js</span></div></div>
+      <div class="skc rv d1"><span class="ski">⚙</span><div class="skt">Dados & Automação</div><div class="skis"><span class="skit">Excel Avançado</span><span class="skit">Dashboards</span><span class="skit">XLSX Export</span><span class="skit">Google Sheets</span></div></div>
+      <div class="skc rv d2"><span class="ski">◎</span><div class="skt">Infra & Redes</div><div class="skis"><span class="skit">Linux</span><span class="skit">Windows</span><span class="skit">NOC</span><span class="skit">Suporte TI</span><span class="skit">Redes TCP/IP</span></div></div>
+      <div class="skc rv"><span class="ski">◈</span><div class="skt">Produção & Design</div><div class="skis"><span class="skit">Camtasia Studio</span><span class="skit">AutoCAD</span><span class="skit">Edição de Vídeo</span><span class="skit">UI Design</span></div></div>
+      <div class="skc rv d1"><span class="ski">◇</span><div class="skt">Idiomas</div><div class="skis"><span class="skit">Inglês B2</span><span class="skit">TOEIC ETS</span><span class="skit">Espanhol Intermediário</span><span class="skit">Português Nativo</span></div></div>
+      <div class="skc rv d2"><span class="ski">∞</span><div class="skt">Em aprendizado</div><div class="skis"><span class="skit">React</span><span class="skit">TypeScript</span><span class="skit">Python</span><span class="skit">SQL</span><span class="skit">Git & GitHub</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────── EDUCAÇÃO ──────────────────────── -->
+<section id="educacao">
+  <div class="w">
+    <div class="sl rv">05 / Formação</div>
+    <h2 class="st rv">Educação</h2>
+    <div class="edug" style="margin-top:2.5rem">
+      <div class="educ rv"><div class="eduy">2024 · Graduação</div><div class="edud">Tecnólogo em Análise e Desenvolvimento de Sistemas</div><div class="edus">FATEC Itapetininga</div></div>
+      <div class="educ rv d1"><div class="eduy">2019 · Técnico</div><div class="edud">Técnico em Edificações</div><div class="edus">IFSP — Campus Itapetininga</div></div>
+      <div class="educ rv d2"><div class="eduy">2018 · Técnico</div><div class="edud">Técnico em Administração</div><div class="edus">ETEC Darcy Pereira de Moraes</div></div>
+      <div class="educ rv d3"><div class="eduy">2022–2024 · Certificação</div><div class="edud">TOEIC — Inglês B2</div><div class="edus">ETS — Educational Testing Service</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────── CONTATO ──────────────────────── -->
+<section id="contato">
+  <div class="w">
+    <div class="sl rv">06 / Contato</div>
+    <div class="ctg">
+      <div class="rv">
+        <h2 class="st">Vamos conversar</h2>
+        <p class="ss" style="margin-bottom:0">Estou aberto a oportunidades, projetos e parcerias. Se faz sentido pro meu perfil, adoraria ouvir.</p>
+        <div class="ctlinks">
+          <a href="mailto:felipeferreira1507@gmail.com" class="clink"><div class="clico">✉</div><div><div class="cll">Email</div><div class="clv">felipeferreira1507@gmail.com</div></div><span class="clarr">→</span></a>
+          <a href="https://linkedin.com/in/felipe-ferreira1507f" target="_blank" rel="noopener" class="clink"><div class="clico">in</div><div><div class="cll">LinkedIn</div><div class="clv">felipe-ferreira1507f</div></div><span class="clarr">→</span></a>
+          <a href="https://github.com/Felipe-1507" target="_blank" rel="noopener" class="clink"><div class="clico">◈</div><div><div class="cll">GitHub</div><div class="clv">github.com/Felipe-1507</div></div><span class="clarr">→</span></a>
+          <a href="tel:+5515981188891" class="clink"><div class="clico">☎</div><div><div class="cll">Telefone</div><div class="clv">(15) 98118-8891</div></div><span class="clarr">→</span></a>
+        </div>
+        <div class="cvbn">
+          <div><div class="ct">Currículo Completo</div><div class="cs">PDF atualizado, gerado na hora</div></div>
+          <button onclick="downloadCV()" class="bcv">⬇ Baixar PDF</button>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="fbox">
+          <form onsubmit="hf(event)">
+            <div class="fg"><label class="fl" for="nm">Nome</label><input type="text" id="nm" class="fi" placeholder="Seu nome" required></div>
+            <div class="fg"><label class="fl" for="em">Email</label><input type="email" id="em" class="fi" placeholder="seu@email.com" required></div>
+            <div class="fg"><label class="fl" for="mg">Mensagem</label><textarea id="mg" class="ft" placeholder="Olá Felipe, gostaria de conversar sobre..." required></textarea></div>
+            <button type="submit" class="fsub" id="fsub">Enviar mensagem →</button>
+            <div id="fst"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="ftl">© 2026 Felipe Ferreira · felipeferreira.dev</div>
+    <div class="ftr">Feito com <em>♥</em> e muito café</div>
+  </div>
+</footer>
+
+<script>
+// ── PARTICLE SYSTEM ──────────────────────────────────────
+(function(){
+  const c=document.getElementById('particles');
+  const ctx=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();
+  window.addEventListener('resize',resize);
+
+  const COLS=['rgba(232,39,42,','rgba(180,20,20,','rgba(255,107,53,'];
+  function mkPt(){
+    const col=COLS[Math.floor(Math.random()*COLS.length)];
+    return{
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
+      r:Math.random()*1.2+.4,
+      a:Math.random()*.6+.1,
+      col,
+      pulse:Math.random()*Math.PI*2
+    }
+  }
+  for(let i=0;i<100;i++) pts.push(mkPt());
+
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=.008;
+    pts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.pulse+=.015;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      const alpha=p.a*(0.7+0.3*Math.sin(p.pulse));
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.col+alpha+')';
+      ctx.fill();
+    });
+    // connections
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<100){
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x,pts[i].y);
+          ctx.lineTo(pts[j].x,pts[j].y);
+          ctx.strokeStyle='rgba(232,39,42,'+(0.06*(1-d/100))+')';
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CURSOR ──────────────────────────────────────────────
+const cur=document.getElementById('cur'),cr=document.getElementById('cr');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function raf(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(raf)})();
+document.querySelectorAll('a,button,.pcard,.skc,.acard,.educ,.clink').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cr.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cr.classList.remove('big'));
+});
+
+// ── PROGRESS BAR ─────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('prog').style.width=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100,100)+'%';
+});
+
+// ── REVEAL ───────────────────────────────────────────────
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// ── MOBILE MENU ──────────────────────────────────────────
+document.getElementById('burger').onclick=()=>document.getElementById('mob').classList.add('open');
+document.getElementById('mobx').onclick=cm;
+function cm(){document.getElementById('mob').classList.remove('open')}
+
+// ── CARROSSEL ────────────────────────────────────────────
+const track=document.getElementById('ctrack');
+const cards=[...track.querySelectorAll('.pcard')];
+const dotsEl=document.getElementById('dots');
+let ci=0;
+function pv(){return window.innerWidth<=700?1:2}
+function ts(){return Math.ceil(cards.length/pv())}
+function buildDots(){
+  dotsEl.innerHTML='';
+  for(let i=0;i<ts();i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i===ci?' on':'');
+    d.onclick=()=>go(i);
+    dotsEl.appendChild(d);
+  }
+}
+function go(idx){
+  ci=Math.max(0,Math.min(idx,ts()-1));
+  const gap=24, cardW=cards[0].offsetWidth+gap;
+  track.style.transform=`translateX(-${ci*pv()*cardW}px)`;
+  buildDots();
+}
+document.getElementById('cprev').onclick=()=>go(ci-1);
+document.getElementById('cnext').onclick=()=>go(ci+1);
+window.addEventListener('resize',()=>{ci=0;track.style.transform='translateX(0)';buildDots()});
+buildDots();
+let tx=null;
+track.addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX},{passive:true});
+track.addEventListener('touchend',e=>{if(tx===null)return;const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50){d>0?go(ci+1):go(ci-1)}tx=null},{passive:true});
+function op(url){window.open(url,'_blank','noopener')}
+
+// ── FORM — Formspree ─────────────────────────────────────
+async function hf(e){
+  e.preventDefault();
+  const btn=document.getElementById('fsub'), st=document.getElementById('fst');
+  const ENDPOINT='https://formspree.io/f/mreorggk';
+
+  btn.textContent='Enviando...'; btn.disabled=true;
+  st.textContent=''; st.style.color='';
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        nome: document.getElementById('nm').value,
+        email: document.getElementById('em').value,
+        mensagem: document.getElementById('mg').value
+      })
+    });
+
+    if(res.ok){
+      st.textContent='✓ Mensagem enviada! Responderei em breve.';
+      st.style.color='var(--tl)';
+      e.target.reset();
+    } else {
+      const data = await res.json();
+      st.textContent = data.errors ? data.errors.map(x=>x.message).join(', ') : '✗ Erro ao enviar. Tente novamente.';
+      st.style.color='var(--v)';
+    }
+  } catch(err){
+    st.textContent='✗ Erro de conexão. Tente novamente.';
+    st.style.color='var(--v)';
+  }
+
+  btn.textContent='Enviar mensagem →'; btn.disabled=false;
+}
+
+// ── CV DOWNLOAD ──────────────────────────────────────────
+function downloadCV(){
+  const w=window.open('','_blank','width=960,height=680');
+  w.document.write(`<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8"><title>Felipe Ferreira — Currículo</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:#111;display:flex;min-height:100vh;font-size:14px}
+.sidebar{width:220px;min-height:100vh;background:#12102a;color:#fff;padding:0;flex-shrink:0}
+.sb-accent{height:8px;background:linear-gradient(90deg,#8a0c0e,#e8272a,#ff6b35)}
+.sb-avatar{width:72px;height:72px;border-radius:50%;background:#1a0608;border:2px solid #e8272a;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:1.3rem;font-weight:700;color:#fff;margin:20px auto 10px}
+.sb-name{font-family:'Space Grotesk';font-weight:700;font-size:.88rem;text-align:center;padding:0 12px 4px;color:#f0f0ff}
+.sb-role{font-size:.62rem;text-align:center;color:#ff6b35;letter-spacing:.08em;padding-bottom:14px;text-transform:uppercase}
+.sb-div{height:1px;background:rgba(255,255,255,.1);margin:0 16px 14px}
+.sb-sec{font-size:.58rem;color:#e8272a;text-transform:uppercase;letter-spacing:.14em;padding:0 16px 5px;font-weight:700}
+.sb-item{padding:0 16px 10px}
+.sb-lbl{font-size:.56rem;color:#6666aa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
+.sb-val{font-size:.72rem;color:#cccce0;line-height:1.4;word-break:break-all}
+.lang-b{padding:0 16px 14px}
+.lang-r{margin-bottom:7px}
+.lang-n{font-size:.68rem;color:#aaaacc;margin-bottom:2px}
+.lang-bg{height:2px;background:rgba(255,255,255,.08);border-radius:2px}
+.lang-f{height:2px;border-radius:2px;background:linear-gradient(90deg,#e8272a,#ff6b35)}
+.lang-l{font-size:.56rem;color:#6666aa;text-align:right;margin-top:1px}
+.sk-l{padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:4px}
+.sk-p{font-size:.58rem;background:rgba(232,39,42,.1);border:1px solid rgba(232,39,42,.22);color:#c0a8a8;padding:2px 6px;border-radius:3px}
+.main{flex:1;display:flex;flex-direction:column}
+.mh{padding:28px 28px 18px;border-bottom:1px solid #e8e8f5}
+.mn{font-family:'Space Grotesk';font-size:1.85rem;font-weight:700;letter-spacing:-.04em;color:#12102a;line-height:1}
+.mr{font-size:.8rem;color:#6666aa;margin-top:3px}
+.av{display:inline-flex;align-items:center;gap:5px;font-size:.64rem;color:#0e7c5e;background:#e0f7f0;border:1px solid #a0ddd0;padding:3px 9px;border-radius:100px;margin-top:8px}
+.avd{width:5px;height:5px;background:#e8272a;border-radius:50%}
+.mb{padding:20px 28px;flex:1}
+.sec{margin-bottom:18px}
+.sec-t{font-family:'Space Grotesk';font-size:.62rem;font-weight:700;color:#e8272a;text-transform:uppercase;letter-spacing:.14em;margin-bottom:7px;padding-bottom:3px;border-bottom:1px solid #f5e8e8}
+.obj{font-size:.76rem;color:#555;line-height:1.65}
+.exp{margin-bottom:12px;padding-left:12px;border-left:2px solid #f5e8e8;position:relative}
+.exp::before{content:'';position:absolute;left:-5px;top:3px;width:8px;height:8px;border-radius:50%;background:#e8272a}
+.epr{font-size:.58rem;color:#ff6b35;letter-spacing:.06em;margin-bottom:1px;font-weight:500}
+.ero{font-family:'Space Grotesk';font-size:.8rem;font-weight:700;color:#12102a}
+.eco{font-size:.7rem;color:#6666aa;margin-bottom:3px}
+.ede{font-size:.72rem;color:#666;line-height:1.55}
+.etg{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.etg span{font-size:.55rem;color:#c81c1e;background:#fff0f0;border:1px solid #ffd0d0;padding:1px 5px;border-radius:3px}
+.edu-g{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.edu-c{background:#f9f9ff;border:1px solid #e8e8f5;border-radius:5px;padding:7px 9px}
+.edu-y{font-size:.56rem;color:#ff6b35;margin-bottom:2px}
+.edu-d{font-size:.7rem;font-weight:700;color:#12102a;line-height:1.3}
+.edu-s{font-size:.62rem;color:#888;margin-top:2px}
+.proj-g{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.proj-c{background:#fff5f5;border:1px solid #ffd0d0;border-radius:5px;padding:7px 9px}
+.proj-n{font-size:.7rem;font-weight:700;color:#c81c1e}
+.proj-t{font-size:.56rem;color:#e8272a;margin:2px 0}
+.proj-d{font-size:.64rem;color:#666;line-height:1.4}
+.fbar{background:linear-gradient(90deg,#8a0c0e,#e8272a);color:#fff;text-align:center;font-size:.6rem;padding:5px;letter-spacing:.06em}
+.nopr{text-align:right;margin-bottom:8px}
+.nopr button{background:#e8272a;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.72rem}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.nopr{display:none!important}.sidebar{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head>
+<body>
+<div class="sidebar">
+  <div class="sb-accent"></div>
+  <div class="sb-avatar">FF</div>
+  <div class="sb-name">Felipe Ferreira</div>
+  <div class="sb-role">Developer & Analyst</div>
+  <div class="sb-div"></div>
+  <div class="sb-sec">Contato</div>
+  <div class="sb-item"><div class="sb-lbl">Email</div><div class="sb-val">felipeferreira1507@gmail.com</div></div>
+  <div class="sb-item"><div class="sb-lbl">Telefone</div><div class="sb-val">(15) 98118-8891</div></div>
+  <div class="sb-item"><div class="sb-lbl">LinkedIn</div><div class="sb-val">felipe-ferreira1507f</div></div>
+  <div class="sb-item"><div class="sb-lbl">GitHub</div><div class="sb-val">github.com/Felipe-1507</div></div>
+  <div class="sb-item" style="padding-bottom:14px"><div class="sb-lbl">Localização</div><div class="sb-val">Itapetininga, SP — Brasil</div></div>
+  <div class="sb-div"></div>
+  <div class="sb-sec">Idiomas</div>
+  <div class="lang-b">
+    <div class="lang-r"><div class="lang-n">Português</div><div class="lang-bg"><div class="lang-f" style="width:100%"></div></div><div class="lang-l">Nativo</div></div>
+    <div class="lang-r"><div class="lang-n">Inglês</div><div class="lang-bg"><div class="lang-f" style="width:80%"></div></div><div class="lang-l">B2 / TOEIC</div></div>
+    <div class="lang-r"><div class="lang-n">Espanhol</div><div class="lang-bg"><div class="lang-f" style="width:50%"></div></div><div class="lang-l">Intermediário</div></div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-sec">Habilidades</div>
+  <div class="sk-l">
+    <span class="sk-p">HTML5</span><span class="sk-p">CSS3</span><span class="sk-p">JavaScript</span><span class="sk-p">Firebase</span><span class="sk-p">Tailwind</span><span class="sk-p">Chart.js</span><span class="sk-p">Excel Avançado</span><span class="sk-p">Linux</span><span class="sk-p">Windows</span><span class="sk-p">AutoCAD</span><span class="sk-p">Camtasia</span><span class="sk-p">Git</span>
+  </div>
+</div>
+<div class="main">
+  <div class="mh">
+    <div class="nopr"><button onclick="window.print()">⬇ Salvar como PDF (Ctrl+P)</button></div>
+    <div class="mn">Felipe Ferreira</div>
+    <div class="mr">Developer & Systems Analyst</div>
+    <div class="av"><div class="avd"></div>Disponível para oportunidades</div>
+  </div>
+  <div class="mb">
+    <div class="sec"><div class="sec-t">Objetivo</div><div class="obj">Atuar na área de tecnologia da informação aplicando habilidades em desenvolvimento front-end, suporte técnico e análise de dados para impulsionar resultados e crescer junto à organização.</div></div>
+    <div class="sec">
+      <div class="sec-t">Experiência Profissional</div>
+      <div class="exp"><div class="epr">Out 2022 — Atualmente</div><div class="ero">Assistente Financeiro</div><div class="eco">Liflex Comércio LTDA</div><div class="ede">Emissão de notas fiscais e boletos bancários, controle de duplicatas e arquivos fiscais. Criação de tabelas e bancos de dados avançados com Excel para automação de processos financeiros.</div><div class="etg"><span>Excel Avançado</span><span>Gestão Financeira</span><span>NF-e</span><span>Análise de Dados</span></div></div>
+      <div class="exp"><div class="epr">Jan 2022 — Mai 2022</div><div class="ero">NOC — Network Operations Center</div><div class="eco">Sapo Telecom LTDA</div><div class="ede">Monitoramento de redes de telecomunicações, configuração de equipamentos, suporte remoto e resolução de incidentes em tempo real.</div><div class="etg"><span>Monitoramento de Rede</span><span>Linux</span><span>Suporte Técnico</span><span>NOC</span></div></div>
+      <div class="exp"><div class="epr">Set 2019 — Set 2021</div><div class="ero">Estagiário em Informática</div><div class="eco">Prefeitura Municipal de Itapetininga</div><div class="ede">Manutenção de computadores e periféricos, suporte técnico e produção de vídeos institucionais.</div><div class="etg"><span>Hardware</span><span>Suporte TI</span><span>Edição de Vídeo</span><span>Windows</span></div></div>
+    </div>
+    <div class="sec"><div class="sec-t">Formação Acadêmica</div><div class="edu-g"><div class="edu-c"><div class="edu-y">2024 · Graduação</div><div class="edu-d">Tecnólogo em Análise e Desenvolvimento de Sistemas</div><div class="edu-s">FATEC Itapetininga</div></div><div class="edu-c"><div class="edu-y">2022–2024 · Certificação</div><div class="edu-d">TOEIC — Inglês B2</div><div class="edu-s">ETS</div></div><div class="edu-c"><div class="edu-y">2019 · Técnico</div><div class="edu-d">Técnico em Edificações</div><div class="edu-s">IFSP — Campus Itapetininga</div></div><div class="edu-c"><div class="edu-y">2018 · Técnico</div><div class="edu-d">Técnico em Administração</div><div class="edu-s">ETEC Darcy Pereira de Moraes</div></div></div></div>
+    <div class="sec"><div class="sec-t">Projetos em Destaque</div><div class="proj-g"><div class="proj-c"><div class="proj-n">Hylian Finance</div><div class="proj-t">HTML · CSS · JS · Firebase · Tailwind · Chart.js</div><div class="proj-d">App web de finanças pessoais com auth Google, dashboard, metas, cartões e export Excel.</div></div><div class="proj-c"><div class="proj-n">HYLIAN (Sistema Interno)</div><div class="proj-t">HTML · Tailwind · JS · Chart.js · XLSX</div><div class="proj-d">Sistema de automação financeira: PIX, boletos, NF, relatórios e Google Sheets.</div></div></div></div>
+  </div>
+  <div class="fbar">felipeferreira.dev &nbsp;·&nbsp; github.com/Felipe-1507 &nbsp;·&nbsp; linkedin.com/in/felipe-ferreira1507f</div>
+</div>
+</body></html>`);
+  w.document.close();
+}
+</script>
+</body>
 </html>
