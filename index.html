@@ -226,7 +226,7 @@ section{padding:7rem 0}
 /* Card body */
 .pbody{padding:1.5rem;flex:1;display:flex;flex-direction:column}
 .pnum{font-family:var(--fm);font-size:.65rem;color:var(--v);letter-spacing:.12em;margin-bottom:.875rem;opacity:.8}
-.pname{font-family:var(--fd);font-size:1.2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;color:var(--t1)}
+.pname{font-family:var(--fd);font-size:1.15rem;font-weight:700;letter-spacing:.04em;margin-bottom:.5rem;color:var(--t1);text-transform:uppercase}
 .pdesc{color:var(--t2);font-size:.88rem;line-height:1.75;flex:1;margin-bottom:1.25rem}
 .pfoot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 .ptech{display:flex;flex-wrap:wrap;gap:.3rem}
@@ -236,76 +236,13 @@ section{padding:7rem 0}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--t3);transition:all .25s;cursor:pointer}
 .dot.on{background:var(--v);width:22px;border-radius:3px}
 
-/* ── HYLIAN FINANCE PREVIEW ── */
-.hf-preview{
-  width:100%;height:100%;
-  background:linear-gradient(160deg,#0d0203 0%,#150408 60%,#100204 100%);
-  display:flex;flex-direction:column;
-  padding:1rem;
-  position:relative;
-}
-/* Fake sidebar */
-.hf-sidebar{
-  position:absolute;left:0;top:0;bottom:0;width:42px;
-  background:#08010203;
-  border-right:1px solid rgba(232,39,42,.18);
-  display:flex;flex-direction:column;align-items:center;padding-top:12px;gap:8px;
-}
-.hf-icon{width:20px;height:4px;border-radius:2px;background:rgba(232,39,42,.15)}
-.hf-icon.act{background:rgba(232,39,42,.7)}
-/* Content */
-.hf-content{margin-left:50px;display:flex;flex-direction:column;gap:8px}
-/* Stats row */
-.hf-stats{display:flex;gap:6px}
-.hf-stat{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(232,39,42,.1);border-radius:6px;padding:5px 7px}
-.hf-stat-val{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#ff6b35;font-weight:500}
-.hf-stat-lbl{font-size:.48rem;color:rgba(192,168,168,.5);text-transform:uppercase;letter-spacing:.06em;margin-top:1px}
-/* Chart bars */
-.hf-chart{display:flex;align-items:flex-end;gap:4px;height:48px;margin-top:4px}
-.hf-bar{border-radius:2px 2px 0 0;animation:barGrow 1s ease forwards}
-@keyframes barGrow{from{height:0}to{height:var(--h)}}
-/* Pie placeholder */
-.hf-pie{width:38px;height:38px;border-radius:50%;background:conic-gradient(#e8272a 0% 45%,#ff6b35 45% 70%,rgba(255,255,255,.08) 70% 100%);margin-left:auto;flex-shrink:0;animation:rotatePie 8s linear infinite}
-@keyframes rotatePie{to{transform:rotate(360deg)}}
-
-/* ── HYLIAN (sistema) PREVIEW ── */
-.hl-preview{
-  width:100%;height:100%;
-  background:linear-gradient(160deg,#0a0005 0%,#160510 60%,#1a0808 100%);
-  display:flex;
-  position:relative;
-  overflow:hidden;
-}
-/* Dark sidebar — preto/vermelho */
-.hl-sidebar{
-  width:44px;flex-shrink:0;
-  background:#060205;
-  border-right:1px solid rgba(239,45,45,.2);
-  display:flex;flex-direction:column;align-items:center;padding-top:10px;gap:7px;
-}
-.hl-dot{width:18px;height:3px;border-radius:2px;background:rgba(239,45,45,.2)}
-.hl-dot.act{background:rgba(239,45,45,.75)}
-/* Main area */
-.hl-main{flex:1;padding:10px;display:flex;flex-direction:column;gap:6px}
-.hl-title{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(239,45,45,.8);letter-spacing:.18em;text-transform:uppercase;margin-bottom:2px}
-/* Metric cards */
-.hl-metrics{display:flex;gap:5px}
-.hl-m{flex:1;background:rgba(239,45,45,.06);border:1px solid rgba(239,45,45,.15);border-radius:5px;padding:5px}
-.hl-m-val{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#ff6b6b;font-weight:500}
-.hl-m-lbl{font-size:.45rem;color:rgba(168,100,100,.6);text-transform:uppercase;margin-top:1px;letter-spacing:.07em}
-/* Table rows */
-.hl-table{display:flex;flex-direction:column;gap:3px;margin-top:2px}
-.hl-row{height:10px;border-radius:2px;background:rgba(239,45,45,.05);border:1px solid rgba(239,45,45,.1);display:flex;align-items:center;padding:0 5px;gap:4px}
-.hl-row-dot{width:4px;height:4px;border-radius:50%}
-.hl-row-bar{height:3px;border-radius:2px;animation:barH 1.2s ease forwards}
-@keyframes barH{from{width:0}to{width:var(--w)}}
-/* Animated triangle watermark */
-.hl-tri{
-  position:absolute;right:8px;bottom:8px;
-  opacity:.08;
-  animation:triPulse 3s ease-in-out infinite;
-}
-@keyframes triPulse{0%,100%{opacity:.06;transform:scale(1)}50%{opacity:.14;transform:scale(1.06)}}
+/* ── IFRAME PREVIEW ── */
+.pprev{height:200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pprev iframe{opacity:0;transition:opacity .5s ease}
+.pprev iframe.loaded{opacity:1}
+.pprev::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:2;
+  background:linear-gradient(to bottom,transparent 60%,rgba(6,2,3,.95) 100%)}
+.pprev-fallback{pointer-events:none;z-index:1}
 
 /* ── EDUCATION ── */
 .edug{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.875rem}
@@ -508,45 +445,21 @@ footer .w{display:flex;justify-content:space-between;align-items:center;flex-wra
         <!-- ── CARD 1: HYLIAN FINANCE ── -->
         <div class="pcard" onclick="op('https://felipe-1507.github.io/hylian_finance/')">
           <span class="pbadge">● Live</span>
-          <div class="pprev">
-            <!-- Preview animado do Hylian Finance -->
-            <div class="hf-preview">
-              <div class="hf-sidebar">
-                <div class="hf-icon act"></div>
-                <div class="hf-icon"></div>
-                <div class="hf-icon"></div>
-                <div class="hf-icon"></div>
-                <div class="hf-icon"></div>
-              </div>
-              <div class="hf-content">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:.55rem;color:rgba(232,39,42,.6);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px">⟁ HYLIAN FINANCE</div>
-                <div class="hf-stats">
-                  <div class="hf-stat">
-                    <div class="hf-stat-val">R$4.820</div>
-                    <div class="hf-stat-lbl">Receitas</div>
-                  </div>
-                  <div class="hf-stat">
-                    <div class="hf-stat-val" style="color:#ff8888">R$1.240</div>
-                    <div class="hf-stat-lbl">Despesas</div>
-                  </div>
-                  <div class="hf-stat">
-                    <div class="hf-stat-val" style="color:#ff6b35">R$3.580</div>
-                    <div class="hf-stat-lbl">Saldo</div>
-                  </div>
-                </div>
-                <!-- Barras animadas -->
-                <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:8px">
-                  <div class="hf-chart" style="flex:1">
-                    <div class="hf-bar" style="--h:28px;width:10px;background:rgba(232,39,42,.4)"></div>
-                    <div class="hf-bar" style="--h:42px;width:10px;background:rgba(232,39,42,.55)"></div>
-                    <div class="hf-bar" style="--h:35px;width:10px;background:rgba(232,39,42,.45)"></div>
-                    <div class="hf-bar" style="--h:48px;width:10px;background:rgba(232,39,42,.6)"></div>
-                    <div class="hf-bar" style="--h:52px;width:10px;background:rgba(255,107,53,.55)"></div>
-                    <div class="hf-bar" style="--h:44px;width:10px;background:rgba(255,107,53,.65)"></div>
-                  </div>
-                  <div class="hf-pie" style="background:conic-gradient(#e8272a 0% 45%,#ff6b35 45% 70%,rgba(255,255,255,.08) 70% 100%)"></div>
-                </div>
-              </div>
+          <div class="pprev" style="background:#0a0a18;cursor:pointer">
+            <!-- iframe real do site -->
+            <iframe
+              id="iframe-hf"
+              src="about:blank"
+              data-src="https://felipe-1507.github.io/hylian_finance/"
+              scrolling="no"
+              tabindex="-1"
+              aria-hidden="true"
+              style="width:200%;height:200%;transform:scale(.5);transform-origin:top left;border:none;pointer-events:none;position:absolute;top:0;left:0"
+            ></iframe>
+            <!-- Fallback enquanto carrega -->
+            <div class="pprev-fallback" id="fb-hf" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#0a0a18;transition:opacity .4s">
+              <svg width="32" height="28" viewBox="0 0 56 50" fill="none"><polygon points="28,3 3,47 53,47" fill="none" stroke="rgba(232,39,42,.5)" stroke-width="2"/><polygon points="28,14 13,40 43,40" fill="none" stroke="rgba(232,39,42,.3)" stroke-width="1.5"/></svg>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(232,39,42,.5);letter-spacing:.14em">HYLIAN FINANCE</span>
             </div>
             <div class="pov">
               <a class="pvst" href="https://felipe-1507.github.io/hylian_finance/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Visitar site →</a>
@@ -554,7 +467,7 @@ footer .w{display:flex;justify-content:space-between;align-items:center;flex-wra
           </div>
           <div class="pbody">
             <div class="pnum">001 / Destaque · Web App</div>
-            <div class="pname">Hylian Finance</div>
+            <div class="pname">HYLIAN FINANCE</div>
             <div class="pdesc">App web de finanças pessoais com autenticação Google via Firebase, dashboard de receitas/despesas, gráficos, gestão de cartões, metas de economia, lembretes e exportação para Excel.</div>
             <div class="pfoot">
               <div class="ptech"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag">Firebase</span><span class="tag">Tailwind</span><span class="tag">Chart.js</span></div>
@@ -563,61 +476,36 @@ footer .w{display:flex;justify-content:space-between;align-items:center;flex-wra
           </div>
         </div>
 
-        <!-- ── CARD 2: HYLIAN (sistema local) ── -->
-        <div class="pcard">
-          <span class="pbadge pbadge-red">● Local</span>
-          <div class="pprev">
-            <!-- Preview animado — preto/vermelho -->
-            <div class="hl-preview">
-              <div class="hl-sidebar">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:.38rem;color:rgba(239,45,45,.5);letter-spacing:.08em;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);margin-bottom:auto;margin-top:6px">HYLIAN</div>
-                <div class="hl-dot act"></div>
-                <div class="hl-dot"></div>
-                <div class="hl-dot"></div>
-                <div class="hl-dot"></div>
-                <div class="hl-dot"></div>
-                <div class="hl-dot"></div>
-              </div>
-              <div class="hl-main">
-                <div class="hl-title">⬡ Dashboard</div>
-                <div class="hl-metrics">
-                  <div class="hl-m">
-                    <div class="hl-m-val">12</div>
-                    <div class="hl-m-lbl">Cancelamentos</div>
-                  </div>
-                  <div class="hl-m">
-                    <div class="hl-m-val" style="color:#ffaa66">47</div>
-                    <div class="hl-m-lbl">NFs Baixadas</div>
-                  </div>
-                  <div class="hl-m">
-                    <div class="hl-m-val" style="color:#ff8888">R$84k</div>
-                    <div class="hl-m-lbl">Valor/Mês</div>
-                  </div>
-                </div>
-                <div class="hl-table">
-                  <div class="hl-row"><div class="hl-row-dot" style="background:#ef2d2d"></div><div class="hl-row-bar" style="--w:55%;background:rgba(239,45,45,.25)"></div></div>
-                  <div class="hl-row"><div class="hl-row-dot" style="background:#ff8855"></div><div class="hl-row-bar" style="--w:38%;background:rgba(255,136,85,.2)"></div></div>
-                  <div class="hl-row"><div class="hl-row-dot" style="background:#ffaa44"></div><div class="hl-row-bar" style="--w:72%;background:rgba(255,170,68,.15)"></div></div>
-                  <div class="hl-row"><div class="hl-row-dot" style="background:#ef2d2d"></div><div class="hl-row-bar" style="--w:28%;background:rgba(239,45,45,.2)"></div></div>
-                </div>
-              </div>
-              <!-- Triângulo watermark animado -->
-              <svg class="hl-tri" width="56" height="50" viewBox="0 0 56 50">
-                <polygon points="28,3 3,47 53,47" fill="none" stroke="#ef2d2d" stroke-width="1.5"/>
-                <polygon points="28,14 13,40 43,40" fill="none" stroke="#ef2d2d" stroke-width="1" opacity=".5"/>
-              </svg>
+        <!-- ── CARD 2: HYLIAN (sistema — agora com subdomínio) ── -->
+        <div class="pcard" onclick="op('https://hylian.felipeferreira.dev')">
+          <span class="pbadge pbadge-red">● Live</span>
+          <div class="pprev" style="background:#0a0203;cursor:pointer">
+            <!-- iframe real do sistema -->
+            <iframe
+              id="iframe-hl"
+              src="about:blank"
+              data-src="https://hylian.felipeferreira.dev"
+              scrolling="no"
+              tabindex="-1"
+              aria-hidden="true"
+              style="width:200%;height:200%;transform:scale(.5);transform-origin:top left;border:none;pointer-events:none;position:absolute;top:0;left:0"
+            ></iframe>
+            <!-- Fallback enquanto carrega -->
+            <div class="pprev-fallback" id="fb-hl" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#0a0203;transition:opacity .4s">
+              <svg width="32" height="28" viewBox="0 0 56 50" fill="none"><polygon points="28,3 3,47 53,47" fill="none" stroke="rgba(232,39,42,.5)" stroke-width="2"/><polygon points="28,14 13,40 43,40" fill="none" stroke="rgba(232,39,42,.3)" stroke-width="1.5"/></svg>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(232,39,42,.5);letter-spacing:.14em">HYLIAN</span>
             </div>
             <div class="pov">
-              <span class="pvst" style="background:var(--red)">Sistema Local</span>
+              <a class="pvst" href="https://hylian.felipeferreira.dev" target="_blank" rel="noopener" onclick="event.stopPropagation()">Visitar site →</a>
             </div>
           </div>
           <div class="pbody">
-            <div class="pnum" style="color:var(--red)">002 / Sistema Interno</div>
+            <div class="pnum" style="color:var(--v)">002 / Sistema Web · Automação</div>
             <div class="pname">HYLIAN</div>
-            <div class="pdesc">Sistema de automação financeira para uso no trabalho. Módulos de depósitos PIX, disparo de boletos, baixa de notas fiscais, relatórios de cobrança, cancelamento de NF e integração com Google Sheets.</div>
+            <div class="pdesc">Sistema de automação financeira empresarial. Módulos de depósitos PIX, disparo de boletos, baixa de notas fiscais, relatórios de cobrança, cancelamento de NF e integração com Google Sheets.</div>
             <div class="pfoot">
               <div class="ptech"><span class="tag">HTML</span><span class="tag">Tailwind</span><span class="tag">JS</span><span class="tag">Chart.js</span><span class="tag">Lucide</span><span class="tag">XLSX</span></div>
-              <span style="font-family:var(--fm);font-size:.68rem;color:var(--t3);letter-spacing:.04em">Uso interno</span>
+              <a href="https://hylian.felipeferreira.dev" target="_blank" rel="noopener" class="plink" onclick="event.stopPropagation()">Abrir ↗</a>
             </div>
           </div>
         </div>
@@ -873,7 +761,34 @@ async function hf(e){
   btn.textContent='Enviar mensagem →'; btn.disabled=false;
 }
 
-// ── CV DOWNLOAD ──────────────────────────────────────────
+// ── IFRAME LAZY LOADING ──────────────────────────────────
+(function(){
+  const iframes = document.querySelectorAll('iframe[data-src]');
+  const fallbacks = {'iframe-hf':'fb-hf','iframe-hl':'fb-hl'};
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const iframe = entry.target;
+      if(iframe.src && iframe.src !== 'about:blank' && iframe.src !== window.location.href) return;
+      // Carregar o src real
+      iframe.src = iframe.dataset.src;
+      iframe.addEventListener('load', ()=>{
+        iframe.classList.add('loaded');
+        // Esconder fallback suavemente
+        const fbId = fallbacks[iframe.id];
+        if(fbId){
+          const fb = document.getElementById(fbId);
+          if(fb){ fb.style.opacity='0'; setTimeout(()=>fb.style.display='none', 500); }
+        }
+      }, {once:true});
+      io.unobserve(iframe);
+    });
+  },{threshold:0.1});
+
+  iframes.forEach(iframe => io.observe(iframe));
+})();
+
 function downloadCV(){
   const w=window.open('','_blank','width=960,height=680');
   w.document.write(`<!DOCTYPE html><html lang="pt-BR"><head>
