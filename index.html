@@ -455,22 +455,24 @@ footer .w{display:flex;justify-content:space-between;align-items:center;flex-wra
       <div class="car-track" id="ctrack">
 
         <!-- CARD 1: NOME -->
-        <div class="pcard pcard-static">
-          <span class="pbadge pbadge-internal">● Em produção</span>
-          <div class="pprev">
-            <div class="internal-preview">
+        <div class="pcard" onclick="op('https://nome.felipeferreira.dev')">
+          <span class="pbadge pbadge-internal">● Demo pública</span>
+          <div class="pprev" style="cursor:pointer">
+            <iframe id="iframe-nome" src="about:blank" data-src="https://nome.felipeferreira.dev" scrolling="no" tabindex="-1" aria-hidden="true" style="width:200%;height:200%;transform:scale(.5);transform-origin:top left;border:none;pointer-events:none;position:absolute;top:0;left:0"></iframe>
+            <div class="pprev-fallback internal-preview" id="fb-nome" style="transition:opacity .4s">
               <div class="internal-mark">NO<em>ME</em></div>
               <div class="internal-kicker">ERP financeiro e operacional</div>
               <div class="internal-meta"><span>Servidor local</span><span>Uso interno</span><span>Multiempresa</span></div>
             </div>
+            <div class="pov"><a class="pvst" href="https://nome.felipeferreira.dev" target="_blank" rel="noopener" onclick="event.stopPropagation()">Ver demo →</a></div>
           </div>
           <div class="pbody">
             <div class="pnum">001 / Projeto principal · Sistema interno</div>
             <div class="pname">NOME</div>
-            <div class="pdesc">ERP modular criado para substituir uma planilha compartilhada de controle financeiro por um sistema com autenticação por perfil de acesso (RBAC) e trilha de auditoria completa. Centraliza notas fiscais, pedidos, boletos, cobranças, depósitos, cancelamentos, conferências e relatórios. Está em operação na rede local da empresa; telas e dados sensíveis não são publicados.</div>
+            <div class="pdesc">ERP modular criado para substituir uma planilha compartilhada de controle financeiro por um sistema com autenticação por perfil de acesso (RBAC) e trilha de auditoria completa. Centraliza notas fiscais, pedidos, boletos, cobranças, depósitos, cancelamentos, conferências e relatórios. Está em produção na rede local da empresa; a versão pública abaixo roda com dados fictícios, sem conexão com o sistema real.</div>
             <div class="pfoot">
               <div class="ptech"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Prisma</span><span class="tag">WebSocket</span><span class="tag">JWT + RBAC</span><span class="tag">Auditoria</span></div>
-              <span class="internal-note">Case interno</span>
+              <a href="https://nome.felipeferreira.dev" target="_blank" rel="noopener" class="plink" onclick="event.stopPropagation()">Ver demo ↗</a>
             </div>
           </div>
         </div>
@@ -860,7 +862,7 @@ async function hf(e){
 // ── IFRAME LAZY LOADING ──────────────────────────────────
 (function(){
   const iframes = document.querySelectorAll('iframe[data-src]');
-  const fallbacks = {'iframe-mf':'fb-mf','iframe-fit':'fb-fit','iframe-ras':'fb-ras','iframe-jc':'fb-jc'};
+  const fallbacks = {'iframe-nome':'fb-nome','iframe-mf':'fb-mf','iframe-fit':'fb-fit','iframe-ras':'fb-ras','iframe-jc':'fb-jc'};
 
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
