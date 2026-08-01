@@ -478,22 +478,24 @@ footer .w{display:flex;justify-content:space-between;align-items:center;flex-wra
         </div>
 
         <!-- CARD 2: FILTROS MERCADOTURBO -->
-        <div class="pcard pcard-static">
-          <span class="pbadge pbadge-internal">● Em desenvolvimento</span>
-          <div class="pprev">
-            <div class="internal-preview">
+        <div class="pcard" onclick="op('https://filtros.felipeferreira.dev')">
+          <span class="pbadge pbadge-internal">● Demo pública</span>
+          <div class="pprev" style="cursor:pointer">
+            <iframe id="iframe-filtros" src="about:blank" data-src="https://filtros.felipeferreira.dev" scrolling="no" tabindex="-1" aria-hidden="true" style="width:200%;height:200%;transform:scale(.5);transform-origin:top left;border:none;pointer-events:none;position:absolute;top:0;left:0"></iframe>
+            <div class="pprev-fallback internal-preview" id="fb-filtros" style="transition:opacity .4s">
               <div class="internal-mark">FILTROS<em>MT</em></div>
               <div class="internal-kicker">Anúncios, estoque e rentabilidade</div>
               <div class="internal-meta"><span>API MELI</span><span>Margem</span><span>Estoque</span></div>
             </div>
+            <div class="pov"><a class="pvst" href="https://filtros.felipeferreira.dev" target="_blank" rel="noopener" onclick="event.stopPropagation()">Ver demo →</a></div>
           </div>
           <div class="pbody">
             <div class="pnum">002 / Analytics · Integração de API</div>
             <div class="pname">FILTROS MERCADOTURBO</div>
-            <div class="pdesc">Sistema interno para analisar e gerenciar anúncios do Mercado Livre, reunindo estoque, custo, tarifas, frete e margem de contribuição. Inclui suíte de testes automatizados para validar as regras de cálculo de tarifa e margem. A evolução prevista inclui recursos para gerenciamento da Central de Promoções.</div>
+            <div class="pdesc">Sistema interno para analisar e gerenciar anúncios do Mercado Livre, reunindo estoque, custo, tarifas, frete e margem de contribuição. Inclui suíte de testes automatizados para validar as regras de cálculo de tarifa e margem. Está em produção na rede local da empresa; a versão pública abaixo roda com dados fictícios, sem conexão com o sistema real.</div>
             <div class="pfoot">
               <div class="ptech"><span class="tag">API Mercado Livre</span><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">HTML</span><span class="tag">JavaScript</span><span class="tag">XLSX</span><span class="tag">Testes (Pytest)</span></div>
-              <span class="internal-note">Rede local</span>
+              <a href="https://filtros.felipeferreira.dev" target="_blank" rel="noopener" class="plink" onclick="event.stopPropagation()">Ver demo ↗</a>
             </div>
           </div>
         </div>
@@ -862,7 +864,7 @@ async function hf(e){
 // ── IFRAME LAZY LOADING ──────────────────────────────────
 (function(){
   const iframes = document.querySelectorAll('iframe[data-src]');
-  const fallbacks = {'iframe-nome':'fb-nome','iframe-mf':'fb-mf','iframe-fit':'fb-fit','iframe-ras':'fb-ras','iframe-jc':'fb-jc'};
+  const fallbacks = {'iframe-nome':'fb-nome','iframe-filtros':'fb-filtros','iframe-mf':'fb-mf','iframe-fit':'fb-fit','iframe-ras':'fb-ras','iframe-jc':'fb-jc'};
 
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
