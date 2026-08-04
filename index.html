@@ -892,112 +892,12 @@ async function hf(e){
 })();
 
 function downloadCV(){
-  const w=window.open('','_blank','width=960,height=680');
-  w.document.write(`<!DOCTYPE html><html lang="pt-BR"><head>
-<meta charset="UTF-8"><title>Felipe Ferreira — Currículo</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:#fff;color:#111;display:flex;min-height:100vh;font-size:14px}
-.sidebar{width:220px;min-height:100vh;background:#12102a;color:#fff;padding:0;flex-shrink:0}
-.sb-accent{height:8px;background:linear-gradient(90deg,#8a0c0e,#e8272a,#ff6b35)}
-.sb-avatar{width:72px;height:72px;border-radius:50%;background:#1a0608;border:2px solid #e8272a;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:1.3rem;font-weight:700;color:#fff;margin:20px auto 10px}
-.sb-name{font-family:'Space Grotesk';font-weight:700;font-size:.88rem;text-align:center;padding:0 12px 4px;color:#f0f0ff}
-.sb-role{font-size:.62rem;text-align:center;color:#ff6b35;letter-spacing:.08em;padding-bottom:14px;text-transform:uppercase}
-.sb-div{height:1px;background:rgba(255,255,255,.1);margin:0 16px 14px}
-.sb-sec{font-size:.58rem;color:#e8272a;text-transform:uppercase;letter-spacing:.14em;padding:0 16px 5px;font-weight:700}
-.sb-item{padding:0 16px 10px}
-.sb-lbl{font-size:.56rem;color:#6666aa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
-.sb-val{font-size:.72rem;color:#cccce0;line-height:1.4;word-break:break-all}
-.lang-b{padding:0 16px 14px}
-.lang-r{margin-bottom:7px}
-.lang-n{font-size:.68rem;color:#aaaacc;margin-bottom:2px}
-.lang-bg{height:2px;background:rgba(255,255,255,.08);border-radius:2px}
-.lang-f{height:2px;border-radius:2px;background:linear-gradient(90deg,#e8272a,#ff6b35)}
-.lang-l{font-size:.56rem;color:#6666aa;text-align:right;margin-top:1px}
-.sk-l{padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:4px}
-.sk-p{font-size:.58rem;background:rgba(232,39,42,.1);border:1px solid rgba(232,39,42,.22);color:#c0a8a8;padding:2px 6px;border-radius:3px}
-.main{flex:1;display:flex;flex-direction:column}
-.mh{padding:28px 28px 18px;border-bottom:1px solid #e8e8f5}
-.mn{font-family:'Space Grotesk';font-size:1.85rem;font-weight:700;letter-spacing:-.04em;color:#12102a;line-height:1}
-.mr{font-size:.8rem;color:#6666aa;margin-top:3px}
-.av{display:inline-flex;align-items:center;gap:5px;font-size:.64rem;color:#0e7c5e;background:#e0f7f0;border:1px solid #a0ddd0;padding:3px 9px;border-radius:100px;margin-top:8px}
-.avd{width:5px;height:5px;background:#e8272a;border-radius:50%}
-.mb{padding:20px 28px;flex:1}
-.sec{margin-bottom:18px}
-.sec-t{font-family:'Space Grotesk';font-size:.62rem;font-weight:700;color:#e8272a;text-transform:uppercase;letter-spacing:.14em;margin-bottom:7px;padding-bottom:3px;border-bottom:1px solid #f5e8e8}
-.obj{font-size:.76rem;color:#555;line-height:1.65}
-.exp{margin-bottom:12px;padding-left:12px;border-left:2px solid #f5e8e8;position:relative}
-.exp::before{content:'';position:absolute;left:-5px;top:3px;width:8px;height:8px;border-radius:50%;background:#e8272a}
-.epr{font-size:.58rem;color:#ff6b35;letter-spacing:.06em;margin-bottom:1px;font-weight:500}
-.ero{font-family:'Space Grotesk';font-size:.8rem;font-weight:700;color:#12102a}
-.eco{font-size:.7rem;color:#6666aa;margin-bottom:3px}
-.ede{font-size:.72rem;color:#666;line-height:1.55}
-.etg{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
-.etg span{font-size:.55rem;color:#c81c1e;background:#fff0f0;border:1px solid #ffd0d0;padding:1px 5px;border-radius:3px}
-.edu-g{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.edu-c{background:#f9f9ff;border:1px solid #e8e8f5;border-radius:5px;padding:7px 9px}
-.edu-y{font-size:.56rem;color:#ff6b35;margin-bottom:2px}
-.edu-d{font-size:.7rem;font-weight:700;color:#12102a;line-height:1.3}
-.edu-s{font-size:.62rem;color:#888;margin-top:2px}
-.proj-g{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.proj-c{background:#fff5f5;border:1px solid #ffd0d0;border-radius:5px;padding:7px 9px}
-.proj-n{font-size:.7rem;font-weight:700;color:#c81c1e}
-.proj-t{font-size:.56rem;color:#e8272a;margin:2px 0}
-.proj-d{font-size:.64rem;color:#666;line-height:1.4}
-.fbar{background:linear-gradient(90deg,#8a0c0e,#e8272a);color:#fff;text-align:center;font-size:.6rem;padding:5px;letter-spacing:.06em}
-.nopr{text-align:right;margin-bottom:8px}
-.nopr button{background:#e8272a;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.72rem}
-@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.nopr{display:none!important}.sidebar{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-</style></head>
-<body>
-<div class="sidebar">
-  <div class="sb-accent"></div>
-  <div class="sb-avatar">FF</div>
-  <div class="sb-name">Felipe Ferreira</div>
-  <div class="sb-role">Systems Developer & Analyst</div>
-  <div class="sb-div"></div>
-  <div class="sb-sec">Contato</div>
-  <div class="sb-item"><div class="sb-lbl">Email</div><div class="sb-val">felipeferreira1507@gmail.com</div></div>
-  <div class="sb-item"><div class="sb-lbl">Telefone</div><div class="sb-val">(15) 98118-8891</div></div>
-  <div class="sb-item"><div class="sb-lbl">LinkedIn</div><div class="sb-val">felipe-ferreira1507f</div></div>
-  <div class="sb-item"><div class="sb-lbl">GitHub</div><div class="sb-val">github.com/Felipe-1507</div></div>
-  <div class="sb-item" style="padding-bottom:14px"><div class="sb-lbl">Localização</div><div class="sb-val">Itapetininga, SP — Brasil</div></div>
-  <div class="sb-div"></div>
-  <div class="sb-sec">Idiomas</div>
-  <div class="lang-b">
-    <div class="lang-r"><div class="lang-n">Português</div><div class="lang-bg"><div class="lang-f" style="width:100%"></div></div><div class="lang-l">Nativo</div></div>
-    <div class="lang-r"><div class="lang-n">Inglês</div><div class="lang-bg"><div class="lang-f" style="width:80%"></div></div><div class="lang-l">B2 / TOEIC</div></div>
-    <div class="lang-r"><div class="lang-n">Espanhol</div><div class="lang-bg"><div class="lang-f" style="width:28%"></div></div><div class="lang-l">Básico</div></div>
-  </div>
-  <div class="sb-div"></div>
-  <div class="sb-sec">Habilidades</div>
-  <div class="sk-l">
-    <span class="sk-p">Node.js</span><span class="sk-p">TypeScript</span><span class="sk-p">Python</span><span class="sk-p">Express</span><span class="sk-p">PostgreSQL</span><span class="sk-p">Prisma</span><span class="sk-p">API Mercado Livre</span><span class="sk-p">JavaScript</span><span class="sk-p">React</span><span class="sk-p">Firebase</span><span class="sk-p">Excel Avançado</span><span class="sk-p">Git</span><span class="sk-p">Linux</span>
-  </div>
-</div>
-<div class="main">
-  <div class="mh">
-    <div class="nopr"><button onclick="window.print()">⬇ Salvar como PDF (Ctrl+P)</button></div>
-    <div class="mn">Felipe Ferreira</div>
-    <div class="mr">Desenvolvedor de Sistemas · Integrações com APIs · Automação de Processos</div>
-    <div class="av"><div class="avd"></div>Disponível para oportunidades</div>
-  </div>
-  <div class="mb">
-    <div class="sec"><div class="sec-t">Objetivo</div><div class="obj">Atuar no desenvolvimento de sistemas, integrações e automação de processos, aplicando conhecimento técnico e experiência operacional para construir soluções confiáveis, úteis e orientadas a resultados.</div></div>
-    <div class="sec">
-      <div class="sec-t">Experiência Profissional</div>
-      <div class="exp"><div class="epr">Out 2022 — Atualmente</div><div class="ero">Assistente Financeiro · Sistemas Internos</div><div class="eco">Liflex Comércio LTDA</div><div class="ede">Desenvolvo e mantenho aplicações internas no servidor local da empresa. Criei o NOME, ERP com autenticação por perfil e trilha de auditoria completa para processos financeiros e operacionais, e duas soluções integradas à API do Mercado Livre: PedidosTurbo (tempo real via WebSocket) e Filtros MercadoTurbo (com testes automatizados para as regras de margem), voltadas à gestão de vendas, anúncios, estoque, custos e margem.</div><div class="etg"><span>Node.js</span><span>TypeScript</span><span>Python</span><span>PostgreSQL</span><span>Prisma</span><span>API Mercado Livre</span></div></div>
-      <div class="exp"><div class="epr">Jan 2022 — Mai 2022</div><div class="ero">Analista NOC</div><div class="eco">Sapo Telecom LTDA</div><div class="ede">Monitorei redes de telecomunicações em tempo real, respondendo a incidentes antes que afetassem clientes. Configurei equipamentos e prestei suporte remoto técnico sob alta pressão operacional.</div><div class="etg"><span>Monitoramento de Rede</span><span>Linux</span><span>Resolução de Incidentes</span></div></div>
-      <div class="exp"><div class="epr">Set 2019 — Set 2021</div><div class="ero">Estagiário em TI</div><div class="eco">Prefeitura Municipal de Itapetininga</div><div class="ede">Mantive o parque tecnológico operando com manutenção preventiva e corretiva, atendendo múltiplos setores. Produzi vídeos institucionais com DaVinci Resolve.</div><div class="etg"><span>Hardware</span><span>Suporte TI</span><span>DaVinci Resolve</span></div></div>
-    </div>
-    <div class="sec"><div class="sec-t">Formação Acadêmica</div><div class="edu-g"><div class="edu-c"><div class="edu-y">Concluído em 2024 · Graduação</div><div class="edu-d">Tecnólogo em Análise e Desenvolvimento de Sistemas</div><div class="edu-s">FATEC Itapetininga</div></div><div class="edu-c"><div class="edu-y">Emitido em 2022 · Certificação Internacional</div><div class="edu-d">TOEIC — Inglês B2</div><div class="edu-s">ETS — Educational Testing Service</div></div><div class="edu-c"><div class="edu-y">Concluído em 2019 · Técnico</div><div class="edu-d">Técnico em Edificações</div><div class="edu-s">IFSP — Campus Itapetininga</div></div><div class="edu-c"><div class="edu-y">Concluído em 2018 · Técnico</div><div class="edu-d">Técnico em Administração</div><div class="edu-s">ETEC Darcy Pereira de Moraes</div></div></div></div>
-    <div class="sec"><div class="sec-t">Projetos em Destaque</div><div class="proj-g"><div class="proj-c" style="grid-column:1/-1"><div class="proj-n">NOME — ERP INTERNO</div><div class="proj-t">Node.js · TypeScript · Express · PostgreSQL · Prisma · JWT/RBAC</div><div class="proj-d">Sistema em produção com autenticação por perfil e trilha de auditoria completa, para centralizar notas fiscais, pedidos, boletos, cobranças, depósitos, cancelamentos, conferências e relatórios.</div></div><div class="proj-c"><div class="proj-n">INTEGRAÇÕES MERCADO LIVRE</div><div class="proj-t">API MELI · Python · WebSocket · Pytest</div><div class="proj-d">PedidosTurbo (tempo real) e Filtros MercadoTurbo (com testes automatizados): gestão de vendas, anúncios, estoque, custos e margem.</div></div><div class="proj-c"><div class="proj-n">MIRAI FINANCE</div><div class="proj-t">JavaScript · Firebase · Tailwind · Chart.js · Claude API</div><div class="proj-d">App de finanças pessoais com autenticação, dashboards, cartões, metas e assistente de IA. (finance.felipeferreira.dev)</div></div></div></div>
-  </div>
-  <div class="fbar">felipeferreira.dev &nbsp;·&nbsp; github.com/Felipe-1507 &nbsp;·&nbsp; linkedin.com/in/felipe-ferreira1507f</div>
-</div>
-</body></html>`);
-  w.document.close();
+  const a=document.createElement('a');
+  a.href='Curriculo_Felipe_Ferreira.pdf';
+  a.download='Curriculo_Felipe_Ferreira.pdf';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 </script>
 </body>
